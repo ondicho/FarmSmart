@@ -34,6 +34,17 @@
         android:hint="What Crop are you interested in??"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/editCropButton"
+        android:layout_width="285dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="12dp"
+        android:background="@color/colorAccent"
+        android:text="Submit Entry"
+        android:textColor="@color/colorTextIcons" />
+
 
 
 </RelativeLayout>
