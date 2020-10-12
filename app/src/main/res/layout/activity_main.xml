@@ -37,9 +37,4 @@
         android:text="Access Material"
         android:textColor="@color/colorTextIcons" />
 
-
-
-
-
-
 </RelativeLayout>
