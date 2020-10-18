@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FarmSmartActivity extends AppCompatActivity {
 
-    private EditText mCropEditText;
-    private Button mEditCropButton;
+    @BindView(R.id.cropEditText) EditText mCropEditText;
+    @BindView(R.id.editCropButton) Button mEditCropButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm_smart);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
 
