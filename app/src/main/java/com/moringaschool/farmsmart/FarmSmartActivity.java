@@ -24,7 +24,7 @@ public class FarmSmartActivity extends AppCompatActivity {
         mEditCropButton=(Button)findViewById(R.id.editCropButton);
         mEditCropButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String cropPreference=mCropEditText.getText().toString();
                 Intent newIntent=new Intent(FarmSmartActivity.this,FarmProcedureActivity.class);
                 newIntent.putExtra("cropPreference",cropPreference);

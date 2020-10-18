@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         mFarmSmartButton=(Button)findViewById(R.id.farmSmartButton);
         mFarmSmartButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this, FarmSmartActivity.class);
                 startActivity(intent);
             }
