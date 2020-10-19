@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 public class FarmProcedureActivity extends AppCompatActivity {
     @BindView(R.id.listView) ListView mListView;
     private String [] crops=new String[]{"Cabbages","Carrots","Potatoes","Onions"};
+    private String [] description=new String[]{"A leafy green vegetable crop","A root vegetable, usually orange in color","A root vegetable that is  a starchy tuber ","Also known as the bulb onion or common onion, is a vegetable"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class FarmProcedureActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mListView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, crops);
+        FarmProcedureArrayAdapter adapter = new FarmProcedureArrayAdapter(this, android.R.layout.simple_list_item_1, crops,description);
         mListView.setAdapter(adapter);
 
         Intent newIntent=getIntent();
