@@ -9,7 +9,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
    @BindView(R.id.farmSmartButton) Button mFarmSmartButton;
 
@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mFarmSmartButton=(Button)findViewById(R.id.farmSmartButton);
-        mFarmSmartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, FarmSmartActivity.class);
+        mFarmSmartButton.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+            if(v == mFarmSmartButton) {
+                Intent intent = new Intent(MainActivity.this, FarmSmartActivity.class);
                 startActivity(intent);
             }
-        });
+        }
     }
-}
