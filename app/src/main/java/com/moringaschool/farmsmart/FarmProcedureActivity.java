@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 public class FarmProcedureActivity extends AppCompatActivity {
     @BindView(R.id.listView) ListView mListView;
@@ -26,4 +27,6 @@ public class FarmProcedureActivity extends AppCompatActivity {
 
         Intent newIntent=getIntent();
     }
+
+    TrefleClient.apiInstances().getPlants( Constants.TREFLE_API_KEY)
 }
