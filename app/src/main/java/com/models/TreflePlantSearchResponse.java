@@ -1,5 +1,5 @@
 
-package com.moringaschool.farmsmart;
+package com.models;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

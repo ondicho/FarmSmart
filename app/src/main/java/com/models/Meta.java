@@ -1,5 +1,5 @@
 
-package com.moringaschool.farmsmart;
+package com.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
