@@ -27,8 +27,8 @@ import retrofit2.Response;
 public class FarmProcedureActivity extends AppCompatActivity {
     @BindView(R.id.listView)
     ListView mListView;
-    private String[] crops = new String[]{"Cabbages", "Carrots", "Potatoes", "Onions"};
-    private String[] description = new String[]{"A leafy green vegetable crop", "A root vegetable, usually orange in color", "A root vegetable that is  a starchy tuber ", "Also known as the bulb onion or common onion, is a vegetable"};
+    private String[] crops ;
+    private String[] description;
     private static final String TAG = "FarmProcedureActivity";
 
     @Override
@@ -38,9 +38,6 @@ public class FarmProcedureActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mListView = (ListView) findViewById(R.id.listView);
-        FarmProcedureArrayAdapter adapter = new FarmProcedureArrayAdapter(this, android.R.layout.simple_list_item_1, crops, description);
-        mListView.setAdapter(adapter);
-
         Intent newIntent = getIntent();
 //call back function for API
         Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(Constants.TREFLE_API_KEY);
