@@ -3,8 +3,11 @@ package com.moringaschool.farmsmart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -63,8 +66,29 @@ public class FarmProcedureActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Datum>> call, Throwable t) {
-
+                Log.e(TAG, "onFailure: ",t );
+                hideProgressBar();
+                showFailureMessage();
             }
         });
     }
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+
+    private void showFailureMessage() {
+        mErrorTextView.setText("Ooops!! Please check your Internet connection and try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Ooops!!. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+
 }
