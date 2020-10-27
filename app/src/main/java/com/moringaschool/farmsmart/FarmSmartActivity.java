@@ -33,7 +33,9 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
         @Override
         public void onClick(View v) {
             if(v == mEditCropButton) {
+                String userInput = mCropEditText.getText().toString();
                 Intent intent = new Intent(FarmSmartActivity.this, FarmProcedureActivity.class);
+                intent.putExtra("userInput",userInput);
                 startActivity(intent);
 
             }

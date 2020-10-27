@@ -41,11 +41,10 @@ public class FarmProcedureActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mListView = (ListView) findViewById(R.id.listView);
+        String userInput= getIntent().getStringExtra("userInput");
 
-
-        Intent newIntent = getIntent();
 //call back function for API
-        Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(Constants.TREFLE_API_KEY);
+        Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(userInput);
         call.enqueue(new Callback<List<Datum>>() {
             @Override
             public void onResponse(Call<List<Datum>> call, Response<List<Datum>> response) {
