@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 public class FarmSmartActivity extends AppCompatActivity  implements View.OnClickListener {
 
     @BindView(R.id.cropEditText) EditText mCropEditText;
     @BindView(R.id.editCropButton) Button mEditCropButton;
+
+    private static final String TAG = "FarmSmartActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,9 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
             if(v == mEditCropButton) {
                 Intent intent = new Intent(FarmSmartActivity.this, FarmProcedureActivity.class);
                 startActivity(intent);
+
             }
         }
-    }
+
+
+}

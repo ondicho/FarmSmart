@@ -41,6 +41,8 @@ public class FarmProcedureActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mListView = (ListView) findViewById(R.id.listView);
+
+
         Intent newIntent = getIntent();
 //call back function for API
         Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(Constants.TREFLE_API_KEY);
@@ -71,6 +73,7 @@ public class FarmProcedureActivity extends AppCompatActivity {
                 showFailureMessage();
             }
         });
+
     }
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
