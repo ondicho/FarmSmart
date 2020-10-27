@@ -15,20 +15,20 @@ import com.networking.TrefleClient;
 
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 
 
-public class FarmProcedureActivity extends AppCompatActivity{
-    @BindView(R.id.listView) ListView mListView;
-    private String [] crops=new String[]{"Cabbages","Carrots","Potatoes","Onions"};
-    private String [] description=new String[]{"A leafy green vegetable crop","A root vegetable, usually orange in color","A root vegetable that is  a starchy tuber ","Also known as the bulb onion or common onion, is a vegetable"};
-    private static final String TAG="FarmProcedureActivity";
+public class FarmProcedureActivity extends AppCompatActivity {
+    @BindView(R.id.listView)
+    ListView mListView;
+    private String[] crops = new String[]{"Cabbages", "Carrots", "Potatoes", "Onions"};
+    private String[] description = new String[]{"A leafy green vegetable crop", "A root vegetable, usually orange in color", "A root vegetable that is  a starchy tuber ", "Also known as the bulb onion or common onion, is a vegetable"};
+    private static final String TAG = "FarmProcedureActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +43,28 @@ public class FarmProcedureActivity extends AppCompatActivity{
         Intent newIntent = getIntent();
 
         Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(Constants.TREFLE_API_KEY);
-        call.enqueue((retrofit2.Callback<List<Datum>>) this);
-    }
+        call.enqueue(new Callback<List<Datum>>() {
+            @Override
+            public void onResponse(Call<List<Datum>> call, Response<List<Datum>> response) {
+                if (response.isSuccessful()){
+                    List<Datum> cropsList=response.body();
+                    String[] crops = new String[cropsList.size()];
+                    String[] description=new String[cropsList.size()];
 
-            public void onResposne(Call<List<Datum>> call,
-                Response<List<Datum>>response){
-                    if (response.isSuccessful()) {
-                        Log.i(TAG, "onResponse:Success");
+                    for (int i=0;i<crops.length;i++){
+                        crops[i]=cropsList.get(i).getCommonName();
+                    }
+                    for (int i=0;i<description.length;i++){
+                        description[i]=cropsList.get(i).getScientificName();
+                    }
+
                 }
             }
 
-            public void onFailure(Call <List<Datum>> call, Throwable t) {
-                Log.e(TAG,"onFailure:Error",t);
+            @Override
+            public void onFailure(Call<List<Datum>> call, Throwable t) {
+
             }
+        });
+    }
 }
