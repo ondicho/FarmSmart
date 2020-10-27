@@ -3,6 +3,7 @@ package com.moringaschool.farmsmart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +42,7 @@ public class FarmProcedureActivity extends AppCompatActivity {
         mListView.setAdapter(adapter);
 
         Intent newIntent = getIntent();
-
+//call back function for API
         Call<List<Datum>> call = TrefleClient.apiInstances().getPlants(Constants.TREFLE_API_KEY);
         call.enqueue(new Callback<List<Datum>>() {
             @Override
@@ -57,7 +58,9 @@ public class FarmProcedureActivity extends AppCompatActivity {
                     for (int i=0;i<description.length;i++){
                         description[i]=cropsList.get(i).getScientificName();
                     }
-
+//array adapter for the API
+                    ArrayAdapter adapter=new FarmProcedureArrayAdapter(FarmProcedureActivity.this, android.R.layout.simple_list_item_1,crops,description);
+                    mListView.setAdapter(adapter);
                 }
             }
 
