@@ -58,7 +58,8 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
         }
 
         public void saveUserInputToFirebase(String userInput){
-        mSearchedCropReference.setValue(userInput);
+        //pass user input as argument to set value in firebase db
+        mSearchedCropReference.push().setValue(userInput);
         }
 
 
