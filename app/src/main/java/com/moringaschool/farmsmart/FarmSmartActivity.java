@@ -22,7 +22,7 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
 
     @BindView(R.id.cropEditText) EditText mCropEditText;
     @BindView(R.id.editCropButton) Button mEditCropButton;
-    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
+//    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     private DatabaseReference mSearchedCropReference;
     private static final String TAG = "FarmSmartActivity";
@@ -31,10 +31,10 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mSearchedCropReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_CROP);
+//        mSearchedCropReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference()
+//                .child(Constants.FIREBASE_CHILD_SEARCHED_CROP);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm_smart);
@@ -49,7 +49,7 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
             if(v == mEditCropButton) {
                 String userInput = mCropEditText.getText().toString();
                 //saving location to firebase
-                saveUserInputToFirebase(userInput);
+//                saveUserInputToFirebase(userInput);
                 Intent intent = new Intent(FarmSmartActivity.this, FarmProcedureActivity.class);
                 intent.putExtra("userInput",userInput);
                 startActivity(intent);
@@ -57,10 +57,10 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
             }
         }
 
-        public void saveUserInputToFirebase(String userInput){
-        //pass user input as argument to set value in firebase db
-        mSearchedCropReference.push().setValue(userInput);
-        }
+//        public void saveUserInputToFirebase(String userInput){
+//        //pass user input as argument to set value in firebase db
+//        mSearchedCropReference.push().setValue(userInput);
+//        }
 
 
 }

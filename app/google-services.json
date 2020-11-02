@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:998027041576:android:cc54b6f467d3aaf2014e1d",
         "android_client_info": {
-          "package_name": "com.moringa.farmsmart"
+          "package_name": "com.moringaschool.farmsmart"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "998027041576-vmpe50ull5r75c1oqigtt90fphpj6bs3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.moringa.farmsmart",
+            "package_name": "com.moringaschool.farmsmart",
             "certificate_hash": "7a2d442edc031465f6e0066702ed044353f177f9"
           }
         },
