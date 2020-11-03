@@ -37,92 +37,101 @@ package com.networking;
 
 import com.Constants;
 
-import com.models.Datum;
-import com.models.Links;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TrefleClient{
 
-    public static void getPlants(String userInput, Callback callback){
-        OkHttpClient client = new OkHttpClient.Builder()
-                .build();
+    private static Retrofit retrofit = null;
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.TREFLE_BASE_URL).newBuilder();
-        String url = urlBuilder.build().toString();
+    public static TrefleApi getPlants() {
+        if (retrofit == null) {
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new Interceptor() {
+                        @Override
+                        public Response intercept(Chain chain) throws IOException {
+                            Request newRequest = chain.request().newBuilder()
+                                    .addHeader("Authorization", Constants.TREFLE_API_KEY)
+                                    .build();
+                            return chain.proceed(newRequest);
+                        }
+                    })
+                    .build();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .header("Authorization", Constants.TREFLE_API_KEY)
-                .build();
-
-        Call call = client.newCall(request);
-        call.enqueue(callback);
-    }
-
-    public ArrayList<Datum> processResults(Response response){
-        ArrayList<Datum> crops = new ArrayList<>();
-        try{
-            String jsonData = response.body().string();
-            JSONObject trefleJSON = new JSONObject(jsonData);
-            JSONArray plantJSON = trefleJSON.getJSONArray("plants");
-            if (response.isSuccessful()){
-                for (int i = 0; i < plantJSON.length(); i++){
-                    JSONObject datumJSON = trefleJSON.getJSONObject(String.valueOf(i));
-                    Integer id=datumJSON.getInt("id");
-                    String commonName = datumJSON.getString("common_name");
-                    String scientificName = datumJSON.getString("scientific_name");
-                    String slug = datumJSON.getString("slug");
-                    Integer year = datumJSON.getInt("year");
-                    String author= datumJSON.getString("author");
-                    String bibliography= datumJSON.getString("bibliography");
-                    String status= datumJSON.getString("status");
-                    String rank= datumJSON.getString("rank");
-                    String imageUrl= datumJSON.getString("imageUrl");
-                    String familyCommonName= datumJSON.getString("familyCommonName");
-                    Integer genusId=datumJSON.getInt("genusId");
-
-                    ArrayList<String> synonyms= new ArrayList<>();
-                    JSONArray synonymsJSON = datumJSON.getJSONObject("synonym").getJSONArray("display_synonym");
-                    for (int y = 0; y < synonymsJSON.length(); y++){
-                        synonyms.add(synonyms.get(y).toString());
-                    }
-                    String genus= datumJSON.getString("genus");
-                    String family= datumJSON.getString("family");
-
-////                    ArrayList<Links> Links= new ArrayList<>();
-//                      JSONArray LinksJSON = datumJSON.getJSONObject("Links").getJSONArray("Links");
-//                        String genus = datumJSON.getString("genus");
-                        String plant = datumJSON.getString("plant");
-                        String self = datumJSON.getString("self");
-//                   for (int y = 0; y < LinksJSON.length(); y++){
-//                       Links.add(Links.get(y));
-//                     }
-
-
-                    Datum datum = new Datum(id,commonName, slug,scientificName, year, bibliography,author,status,rank,familyCommonName,genusId,imageUrl,synonyms,genus,family,new Links(self,plant,genus));
-                    crops.add(datum);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+//            HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.TREFLE_LEFT_URL + Constants.TREFLE_API_KEY + Constants.TREFLE_RIGHT_URL + userInput).newBuilder();
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.TREFLE_LEFT_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
-        return crops;
+            return retrofit.create(TrefleApi.class);
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
