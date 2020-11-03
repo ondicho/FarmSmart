@@ -117,7 +117,7 @@ public class TrefleClient {
             Gson g=new Gson();
             String jsonData = response.body().string();
             JSONObject trefleJSON = new JSONObject(jsonData);
-            JSONArray plantJSON=trefleJSON.getJSONArray("userInput");
+            JSONArray plantJSON=trefleJSON.getJSONArray("data");
 //            Datum data = g.fromJson(jsonData, Datum.class);
 
             if (response.isSuccessful()) {
@@ -134,12 +134,12 @@ public class TrefleClient {
                     datum.setBibliography(datumJSON.getString("bibliography"));
                     datum.setStatus(datumJSON.getString("status"));
                     datum.setRank(datumJSON.getString("rank"));
-                    datum.setImageUrl(datumJSON.getString("imageUrl"));
-                    datum.setFamilyCommonName(datumJSON.getString("familyCommonName"));
-                    datum.setGenusId(datumJSON.getInt("genusId"));
+                    datum.setImageUrl(datumJSON.getString("image_url"));
+                    datum.setFamilyCommonName(datumJSON.getString("family_common_name"));
+                    datum.setGenusId(datumJSON.getInt("genus_id"));
                     datum.setFamily(datumJSON.getString("family"));
                     ArrayList<String> synonyms = new ArrayList<>();
-                    JSONArray synonymsJSON = datumJSON.getJSONObject("synonym").getJSONArray("display_synonym");
+                    JSONArray synonymsJSON = datumJSON.getJSONObject("synonyms").getJSONArray("display_synonym");
                     for (int y = 0; y < synonymsJSON.length(); y++) {
                         synonyms.add(synonyms.get(y).toString());
                     }

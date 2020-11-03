@@ -57,7 +57,7 @@ public class FarmProcedureActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(Call call,Response response) throws IOException {
                 crops=trefleClient.processResults(response);
                 FarmProcedureActivity.this.runOnUiThread(new Runnable() {
                     @Override
