@@ -15,25 +15,27 @@ import com.models.TreflePlantSearchResponse;
 import com.networking.TrefleApi;
 import com.networking.TrefleClient;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class FarmProcedureActivity extends AppCompatActivity {
+    public static final String TAG=FarmProcedureActivity.class.getSimpleName();
+    private List<Datum> crops =new ArrayList<>();
+    private List<Datum> description=new ArrayList<>();
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    private CropListAdapter mAdapter;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
 //    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-
-    private CropListAdapter mAdapter;
-    private List<Datum> crops =new ArrayList<>();
-    private String[] description;
-    private static final String TAG = "FarmProcedureActivity";
 
     @Override                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,51 +45,31 @@ public class FarmProcedureActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String userInput = intent.getStringExtra("userInput");
-        TrefleApi client=TrefleClient.getPlants();
+        getPlants(userInput);
+    }
 
-        Call<TreflePlantSearchResponse> call=client.getPlants("userInput");
-        call.enqueue(new Callback<TreflePlantSearchResponse>() {
+    private void getPlants(String userInput){
+        final TrefleClient trefleClient=new TrefleClient();
+        trefleClient.findCrops(userInput, new Callback() {
             @Override
-            public void onResponse(Call<TreflePlantSearchResponse> call, Response<TreflePlantSearchResponse> response) {
-                if(response.isSuccessful()){
-                    crops=response.body().getData();
-                    mAdapter=new CropListAdapter(FarmProcedureActivity.this,crops);
-                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(FarmProcedureActivity.this);
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setHasFixedSize(true);
-
-                    showCrops();
-                }else {
-                    showUnsuccessfulMessage();
-                }
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                e.printStackTrace();
             }
 
             @Override
-            public void onFailure(Call<TreflePlantSearchResponse> call, Throwable t) {
-                showFailureMessage();
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                crops=trefleClient.processResults(response);
+                FarmProcedureActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter=new CropListAdapter(getApplicationContext(),crops);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(FarmProcedureActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+                    }
+                });
             }
         });
     }
-
-
-    private void showFailureMessage() {
-        mErrorTextView.setText("Ooops!! Please check your Internet connection and try again later");
-        mErrorTextView.setVisibility(View.VISIBLE);
-    }
-//
-    private void showUnsuccessfulMessage() {
-        mErrorTextView.setText("Ooops!!. Please try again later");
-        mErrorTextView.setVisibility(View.VISIBLE);
-    }
-//
-//
-////    private void hideProgressBar() {
-////        mProgressBar.setVisibility(View.GONE);
-////    }
-//
-    private void showCrops() {
-        mRecyclerView.setVisibility(View.VISIBLE);
-    }
-
-
 }
