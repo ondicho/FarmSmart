@@ -2,7 +2,6 @@ package com.moringaschool.farmsmart;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adapters.CropListAdapter;
 import com.models.Datum;
-import com.models.TreflePlantSearchResponse;
-import com.networking.TrefleApi;
 import com.networking.TrefleClient;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,8 +25,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-public class FarmProcedureActivity extends AppCompatActivity {
-    public static final String TAG=FarmProcedureActivity.class.getSimpleName();
+public class FarmListActivity extends AppCompatActivity {
+    public static final String TAG= FarmListActivity.class.getSimpleName();
     private List<Datum> crops =new ArrayList<>();
     private List<Datum> description=new ArrayList<>();
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -40,7 +37,7 @@ public class FarmProcedureActivity extends AppCompatActivity {
     @Override                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_farm_procedure);
+        setContentView(R.layout.activity_farm_list);
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
@@ -59,12 +56,12 @@ public class FarmProcedureActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call,Response response) throws IOException {
                 crops=trefleClient.processResults(response);
-                FarmProcedureActivity.this.runOnUiThread(new Runnable() {
+                FarmListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter=new CropListAdapter(getApplicationContext(),crops);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(FarmProcedureActivity.this);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(FarmListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }

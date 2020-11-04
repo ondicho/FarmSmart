@@ -1,6 +1,5 @@
 package com.moringaschool.farmsmart;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.Constants;
@@ -72,7 +70,7 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
                 String userInput = mCropEditText.getText().toString();
                 //saving location to firebase
                 saveUserInputToFirebase(userInput);
-                Intent intent = new Intent(FarmSmartActivity.this, FarmProcedureActivity.class);
+                Intent intent = new Intent(FarmSmartActivity.this, FarmListActivity.class);
                 intent.putExtra("userInput",userInput);
                 startActivity(intent);
 

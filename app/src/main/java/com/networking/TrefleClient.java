@@ -10,10 +10,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.models.Datum;
 import com.models.Links;
-import com.moringaschool.farmsmart.FarmProcedureActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,13 +20,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 ////
 ////public class TrefleClient {
 ////    public static Retrofit retrofit=null;
