@@ -21,6 +21,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -138,19 +141,26 @@ public class TrefleClient {
                     datum.setFamilyCommonName(datumJSON.getString("family_common_name"));
                     datum.setGenusId(datumJSON.getInt("genus_id"));
                     datum.setFamily(datumJSON.getString("family"));
-                    ArrayList<String> synonyms = new ArrayList<>();
-                    JSONArray synonymsJSON = datumJSON.getJSONObject("synonyms").getJSONArray("display_synonym");
-                    for (int y = 0; y < synonymsJSON.length(); y++) {
-                        synonyms.add(synonyms.get(y).toString());
-                    }
 
+                    JSONArray synonymsArray=datumJSON.getJSONArray("synonyms");
+                    for(int y=0;y<synonymsArray.length();y++){
+                        JSONObject synonymsJSON=synonymsArray.getJSONObject(y);
+                        datum.setSynonyms(Arrays.asList(synonymsJSON.getString("synonyms")));
+                    }
+                    JSONArray linksArray=datumJSON.getJSONArray("links");
+                    for(int y=0;y<linksArray.length();y++){
+                        JSONObject linksJSON=linksArray.getJSONObject(y);
+                        links.setSelf(linksJSON.getString("self"));
+                        links.setPlant(linksJSON.getString("plant"));
+                        links.setGenus(linksJSON.getString("genus"));
+                    }
 
                     ////                    ArrayList<Links> Links= new ArrayList<>();
                     //                      JSONArray LinksJSON = datumJSON.getJSONObject("Links").getJSONArray("Links");
                     //                        String genus = datumJSON.getString("genus");
-                    links.setPlant(datumJSON.getString("plant"));
-                    links.setGenus(datumJSON.getString("genus"));
-                    links.setSelf(datumJSON.getString("self"));
+//                    links.setPlant(datumJSON.getString("plant"));
+//                    links.setGenus(datumJSON.getString("genus"));
+//                    links.setSelf(datumJSON.getString("self"));
                     //                   for (int y = 0; y < LinksJSON.length(); y++){
                     //                       Links.add(Links.get(y));
                     //                     }
