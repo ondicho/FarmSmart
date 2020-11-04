@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FarmDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/searchedCropimageView"
+        android:src=""
+        android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/commonNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorTextIcons"
+        />
+    <TextView
+        android:id="@+id/scientificNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorTextIcons"
+        />
+
+    <Button
+        android:id="@+id/saveSearchedCropButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="12dp"
+        android:text="Save Crop" />
+
+
+</FrameLayout>

@@ -7,13 +7,28 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+
+import com.moringaschool.farmsmart.R;
+import com.models.Datum;
+import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CropDetailFragment#newInstance} factory method to
+ * Use the {@link FarmDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CropDetailFragment extends Fragment {
+public class FarmDetailFragment extends Fragment {
+    @BindView(R.id.searchedCropimageView) ImageView mImageLabel;
+    @BindView(R.id.commonNameTextView) TextView mCommonNameLabel;
+    @BindView(R.id.scientificNameTextView) TextView mScientificNameLabel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +39,7 @@ public class CropDetailFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CropDetailFragment() {
+    public FarmDetailFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +49,11 @@ public class CropDetailFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CropDetailFragment.
+     * @return A new instance of fragment FarmDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CropDetailFragment newInstance(String param1, String param2) {
-        CropDetailFragment fragment = new CropDetailFragment();
+    public static FarmDetailFragment newInstance(String param1, String param2) {
+        FarmDetailFragment fragment = new FarmDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +74,6 @@ public class CropDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crop_detail, container, false);
+        return inflater.inflate(R.layout.fragment_farm_detail, container, false);
     }
 }
