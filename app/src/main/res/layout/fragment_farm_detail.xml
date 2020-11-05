@@ -10,13 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/searchedCropimageView"
-        android:src=""
         android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/commonNameTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text=""
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorTextIcons"
         />
@@ -24,7 +22,6 @@
         android:id="@+id/scientificNameTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text=""
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorTextIcons"
         />

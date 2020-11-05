@@ -25,7 +25,7 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
 
     @BindView(R.id.cropEditText) EditText mCropEditText;
     @BindView(R.id.editCropButton) Button mEditCropButton;
-    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
+//    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     private DatabaseReference mSearchedCropReference;
     private static final String TAG = "FarmSmartActivity";
