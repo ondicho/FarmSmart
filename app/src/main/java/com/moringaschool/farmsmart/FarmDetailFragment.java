@@ -11,8 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.Constants;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.farmsmart.R;
 import com.models.Datum;
 import com.squareup.picasso.Picasso;
@@ -26,11 +30,11 @@ import butterknife.ButterKnife;
  * Use the {@link FarmDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FarmDetailFragment extends Fragment {
+public class FarmDetailFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.searchedCropimageView) ImageView mImageLabel;
     @BindView(R.id.commonNameTextView) TextView mCommonNameLabel;
     @BindView(R.id.scientificNameTextView) TextView mScientificNameLabel;
-    @BindView(R.id.saveSearchedCropButton) Button mSaveSearchedCropLabel;
+    @BindView(R.id.saveSearchedCropButton) Button mSaveSearchedCropButton;
 
     private Datum mCrop;
 
@@ -60,6 +64,19 @@ public class FarmDetailFragment extends Fragment {
         Picasso.get().load(mCrop.getImageUrl()).into(mImageLabel);
         mCommonNameLabel.setText(mCrop.getCommonName());
         mScientificNameLabel.setText(mCrop.getScientificName());
+
+        mSaveSearchedCropButton.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mSaveSearchedCropButton) {
+            DatabaseReference cropReference = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_CROP);
+            cropReference.push().setValue(mCrop);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+        }
     }
 }
