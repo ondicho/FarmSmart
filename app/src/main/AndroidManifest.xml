@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moringaschool.farmsmart">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,18 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SavedCropListActivity"></activity>
         <activity android:name=".FarmListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.farmsmart.FarmSmartActivity">
-            </meta-data>
+                android:value="com.moringaschool.farmsmart.FarmSmartActivity"></meta-data>
         </activity>
-        <activity
-            android:name=".FarmSmartActivity">
+        <activity android:name=".FarmSmartActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.farmsmart.MainActivity">
-            </meta-data>
+                android:value="com.moringaschool.farmsmart.MainActivity"></meta-data>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -31,7 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
