@@ -2,6 +2,8 @@ package com.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.models.Datum;
+import com.moringaschool.farmsmart.FarmDetailActivity;
 import com.moringaschool.farmsmart.R;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -47,7 +52,7 @@ public class CropListAdapter extends RecyclerView.Adapter<CropListAdapter.CropVi
         return mCrops.size();
     }
 
-    public class CropViewHolder extends RecyclerView.ViewHolder {
+    public class CropViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.cropImageView) ImageView mCropImageView;
         @BindView(R.id.plantNameTextView) TextView mplantNameTextView;
@@ -59,11 +64,21 @@ public class CropListAdapter extends RecyclerView.Adapter<CropListAdapter.CropVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindCrop(Datum datum){
             mplantNameTextView.setText(datum.getCommonName());
             mDescriptionTextView.setText(datum.getScientificName());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition=getLayoutPosition();
+            Intent intent=new Intent(mContext, FarmDetailActivity.class);
+            intent.putExtra("position",itemPosition);
+            intent.putExtra("crops", Parcels.wrap(mCrops));
+            mContext.startActivity(intent);
         }
     }
 }
