@@ -2,6 +2,8 @@ package com.moringaschool.farmsmart;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,14 +27,14 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-public class FarmListActivity extends AppCompatActivity {
+public class FarmListActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG= FarmListActivity.class.getSimpleName();
     private List<Datum> crops =new ArrayList<>();
     private List<Datum> description=new ArrayList<>();
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     private CropListAdapter mAdapter;
     @BindView(R.id.errorTextView) TextView mErrorTextView;
-//    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.savedCropsbutton) Button mSavedCropsButton;
 
     @Override                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class FarmListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String userInput = intent.getStringExtra("userInput");
         getPlants(userInput);
+        mSavedCropsButton.setOnClickListener(this);
+
     }
 
     private void getPlants(String userInput){
@@ -68,5 +72,14 @@ public class FarmListActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v==mSavedCropsButton){
+            Intent intent=new Intent(FarmListActivity.this,SavedCropListActivity.class);
+            startActivity(intent);
+        }
+
     }
 }
