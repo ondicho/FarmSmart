@@ -25,8 +25,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.moringaschool.farmsmart.FarmSmartActivity" />
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/NoActionBarTheme">
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 
