@@ -6,16 +6,15 @@
     tools:context=".MainActivity"
     android:background="#000000">
 
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/imageView"
-        android:src="@drawable/farm"
+        android:src="@drawable/farm5"
         android:scaleType="centerCrop" />
 
-
     <TextView
-        android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,15 +25,40 @@
         android:textStyle="bold"
         android:textColor="@color/colorTextIcons"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cropEditText"
+        android:background="@color/colorTextIcons"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        android:hint="What Crop are you interested in??"
+        android:layout_centerHorizontal="true" />
+
     <Button
-        android:id="@+id/farmSmartButton"
+        android:id="@+id/findCropButton"
         android:layout_width="285dp"
         android:layout_height="70dp"
+        android:layout_above="@+id/savedCropsbutton"
+        android:layout_centerInParent="true"
+        android:background="@color/colorAccent"
+        android:text="Find crops"
+        android:textColor="@color/colorTextIcons"
+        android:layout_marginBottom="25dp"/>
+
+    <Button
+        android:id="@+id/savedCropsbutton"
+        android:layout_width="285dp"
+        android:layout_height="70dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorTextIcons"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="12dp"
-        android:background="@color/colorAccent"
-        android:text="Access Material"
-        android:textColor="@color/colorTextIcons" />
+        android:text="Saved Crops"
+        android:layout_marginBottom="25dp"
+        />
+
 
 </RelativeLayout>

@@ -7,8 +7,6 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -49,7 +47,7 @@ public class FarmListActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @BindView(R.id.errorTextView) TextView mErrorTextView;
-//    @BindView(R.id.savedCropsbutton) Button mSavedCropsButton;
+
 
     @Override                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,40 +69,41 @@ public class FarmListActivity extends AppCompatActivity {
     }
 
 //
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_search, menu);
-//        ButterKnife.bind(this);
-//
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mEditor = mSharedPreferences.edit();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        ButterKnife.bind(this);
 
-//        MenuItem menuItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                addToSharedPreferences(query);
-//                getPlants(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//
-//        });
-//        return true;
-//    }
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-//    }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                getPlants(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     private void getPlants(String userInput){
         final TrefleClient trefleClient=new TrefleClient();
