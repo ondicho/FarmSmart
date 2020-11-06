@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:hint="Email"
+            android:hint="Email address"
             android:inputType="textEmailAddress"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dp"
@@ -46,14 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:hint="Password"
+            android:hint="Password,should be atleast 6 characters long"
             android:inputType="textPassword"
             android:nextFocusDown="@+id/passwordEditText"
             android:padding="10dp"
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/confirmPasswordEditText"
@@ -67,7 +67,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
         <Button
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Sign up"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorTextIcons" />
 
@@ -96,7 +96,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Account"
+        android:text="Sign UP"
         android:textColor="@color/colorPrimaryLight"
         android:textSize="30dp"
         android:textStyle="bold"
