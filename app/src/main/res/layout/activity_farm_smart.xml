@@ -38,12 +38,12 @@
         android:id="@+id/findCropButton"
         android:layout_width="285dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/savedCropsbutton"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="12dp"
         android:background="@color/colorAccent"
-        android:text="Submit Entry"
-        android:textColor="@color/colorTextIcons" />
+        android:text="Find crops"
+        android:textColor="@color/colorTextIcons"
+        android:layout_marginBottom="25dp"/>
 
     <Button
         android:id="@+id/savedCropsbutton"

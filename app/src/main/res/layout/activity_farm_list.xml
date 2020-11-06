@@ -36,7 +36,8 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="@color/colorTextIcons"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        />
 
     <ListView
         android:layout_width="match_parent"

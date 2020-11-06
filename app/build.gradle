@@ -74,4 +74,6 @@ dependencies {
     implementation "androidx.fragment:fragment:$fragment_version"
     //firebase recycler view
     implementation 'com.firebaseui:firebase-ui-database:3.3.1'
+    //firebase auth
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
 }

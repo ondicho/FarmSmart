@@ -30,7 +30,8 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
 
     @BindView(R.id.findCropButton) Button mFindCropButton;
     @BindView(R.id.savedCropsbutton) Button mSavedCropsButton;
-//    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
+
+    @BindView(R.id.cropEditText) EditText mCropEditText;
 
 //    private DatabaseReference mSearchedCropReference;
 //    private static final String TAG = "FarmSmartActivity";
@@ -78,7 +79,10 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
         @Override
         public void onClick(View v) {
             if(v == mFindCropButton) {
-              Intent intent=new Intent(FarmSmartActivity.this,FarmListActivity.class);
+              String userInput=mCropEditText.getText().toString();
+
+                Intent intent=new Intent(FarmSmartActivity.this,FarmListActivity.class);
+              intent.putExtra("userInput",userInput);
               startActivity(intent);
             }
 

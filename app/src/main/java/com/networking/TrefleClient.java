@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 
@@ -136,17 +137,15 @@ public class TrefleClient {
                     datum.setGenusId(datumJSON.getInt("genus_id"));
                     datum.setFamily(datumJSON.getString("family"));
 
-                    JSONArray synonymsArray=datumJSON.getJSONArray("synonyms");
-                    for(int y=0;y<synonymsArray.length();y++){
-                        JSONObject synonymsJSON=synonymsArray.getJSONObject(y);
-                        datum.setSynonyms(Arrays.asList(synonymsJSON.getString("synonyms")));
+                    JSONArray synonyms=datumJSON.getJSONArray("synonyms");
+                    for (int y = 0; y < synonyms.length(); y++) {
+                        String pet = synonyms.getString(y);
                     }
+
+
                     JSONArray linksArray=datumJSON.getJSONArray("links");
                     for(int y=0;y<linksArray.length();y++){
-                        JSONObject linksJSON=linksArray.getJSONObject(y);
-                        links.setSelf(linksJSON.getString("self"));
-                        links.setPlant(linksJSON.getString("plant"));
-                        links.setGenus(linksJSON.getString("genus"));
+                        String Self=linksArray.getString(y);
                     }
 
                     ////                    ArrayList<Links> Links= new ArrayList<>();

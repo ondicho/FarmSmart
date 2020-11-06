@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SavedCropListActivity"></activity>
+        <activity android:name=".CreateAccountActivity"></activity>
+        <activity android:name=".SavedCropListActivity" />
         <activity android:name=".FarmListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.farmsmart.FarmSmartActivity"></meta-data>
+                android:value="com.moringaschool.farmsmart.FarmSmartActivity" />
         </activity>
         <activity android:name=".FarmSmartActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moringaschool.farmsmart.MainActivity"></meta-data>
+                android:value="com.moringaschool.farmsmart.MainActivity" />
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
