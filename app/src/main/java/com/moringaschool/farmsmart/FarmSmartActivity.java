@@ -3,12 +3,13 @@ package com.moringaschool.farmsmart;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.Constants;
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +24,11 @@ import butterknife.ButterKnife;
 
 public class FarmSmartActivity extends AppCompatActivity  implements View.OnClickListener {
 
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+
     @BindView(R.id.cropEditText) EditText mCropEditText;
-    @BindView(R.id.editCropButton) Button mEditCropButton;
+    @BindView(R.id.findCropButton) Button mFindCropButton;
 //    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     private DatabaseReference mSearchedCropReference;
@@ -40,6 +44,8 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
                 .child(Constants.FIREBASE_CHILD_SEARCHED_CROP);
 
         mSearchedCropReferenceListener=mSearchedCropReference.addValueEventListener(new ValueEventListener() {
+
+
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for(DataSnapshot userInputSnapshot: snapshot.getChildren()){
@@ -60,16 +66,23 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
 
         Intent intent = getIntent();
 
-        mEditCropButton.setOnClickListener(this);
+        mSharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor=mSharedPreferences.edit();
+
+        mFindCropButton.setOnClickListener(this);
 
 
     }
         @Override
         public void onClick(View v) {
-            if(v == mEditCropButton) {
+            if(v == mFindCropButton) {
                 String userInput = mCropEditText.getText().toString();
                 //saving location to firebase
                 saveUserInputToFirebase(userInput);
+                //shared preferences
+                if(!(userInput).equals("")) {
+                    addToSharedPreferences(userInput);
+                }
                 Intent intent = new Intent(FarmSmartActivity.this, FarmListActivity.class);
                 intent.putExtra("userInput",userInput);
                 startActivity(intent);
@@ -88,5 +101,7 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
         mSearchedCropReference.removeEventListener(mSearchedCropReferenceListener);
     }
 
-
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_CROP_KEY, location).apply();
+    }
 }

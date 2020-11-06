@@ -1,7 +1,9 @@
 package com.moringaschool.farmsmart;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.Constants;
 import com.adapters.CropListAdapter;
 import com.models.Datum;
 import com.networking.TrefleClient;
@@ -31,8 +34,14 @@ public class FarmListActivity extends AppCompatActivity implements View.OnClickL
     public static final String TAG= FarmListActivity.class.getSimpleName();
     private List<Datum> crops =new ArrayList<>();
     private List<Datum> description=new ArrayList<>();
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+
+    private SharedPreferences mSharedPreferences;
+    private String mRecentCrop;
+
+
     private CropListAdapter mAdapter;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.savedCropsbutton) Button mSavedCropsButton;
 
@@ -47,6 +56,12 @@ public class FarmListActivity extends AppCompatActivity implements View.OnClickL
         getPlants(userInput);
         mSavedCropsButton.setOnClickListener(this);
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentCrop=mSharedPreferences.getString(Constants.PREFERENCES_CROP_KEY,null);
+
+        if (mRecentCrop != null) {
+            getPlants(mRecentCrop);
+        }
     }
 
     private void getPlants(String userInput){
