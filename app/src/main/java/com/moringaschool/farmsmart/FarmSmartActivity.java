@@ -27,38 +27,39 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
-    @BindView(R.id.cropEditText) EditText mCropEditText;
+
     @BindView(R.id.findCropButton) Button mFindCropButton;
+    @BindView(R.id.savedCropsbutton) Button mSavedCropsButton;
 //    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
-    private DatabaseReference mSearchedCropReference;
-    private static final String TAG = "FarmSmartActivity";
-    private ValueEventListener  mSearchedCropReferenceListener;
+//    private DatabaseReference mSearchedCropReference;
+//    private static final String TAG = "FarmSmartActivity";
+//    private ValueEventListener  mSearchedCropReferenceListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        mSearchedCropReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_CROP);
-
-        mSearchedCropReferenceListener=mSearchedCropReference.addValueEventListener(new ValueEventListener() {
-
-
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for(DataSnapshot userInputSnapshot: snapshot.getChildren()){
-                    String userInput=userInputSnapshot.getValue().toString();
-                    Log.d("Searched crops updated","Searched Crop:" + userInput);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
+//
+////        mSearchedCropReference = FirebaseDatabase
+////                .getInstance()
+////                .getReference()
+////                .child(Constants.FIREBASE_CHILD_SEARCHED_CROP);
+////
+////        mSearchedCropReferenceListener=mSearchedCropReference.addValueEventListener(new ValueEventListener() {
+//
+//
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                for(DataSnapshot userInputSnapshot: snapshot.getChildren()){
+//                    String userInput=userInputSnapshot.getValue().toString();
+//                    Log.d("Searched crops updated","Searched Crop:" + userInput);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//
+//            }
+//        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm_smart);
@@ -70,38 +71,34 @@ public class FarmSmartActivity extends AppCompatActivity  implements View.OnClic
         mEditor=mSharedPreferences.edit();
 
         mFindCropButton.setOnClickListener(this);
+        mSavedCropsButton.setOnClickListener(this);
 
 
     }
         @Override
         public void onClick(View v) {
             if(v == mFindCropButton) {
-                String userInput = mCropEditText.getText().toString();
-                //saving location to firebase
-                saveUserInputToFirebase(userInput);
-                //shared preferences
-                if(!(userInput).equals("")) {
-                    addToSharedPreferences(userInput);
-                }
-                Intent intent = new Intent(FarmSmartActivity.this, FarmListActivity.class);
-                intent.putExtra("userInput",userInput);
+              Intent intent=new Intent(FarmSmartActivity.this,FarmListActivity.class);
+              startActivity(intent);
+            }
+
+            if(v == mSavedCropsButton) {
+                Intent intent = new Intent(FarmSmartActivity.this, SavedCropListActivity.class);
                 startActivity(intent);
+            }
 
             }
         }
 
-        public void saveUserInputToFirebase(String userInput){
-        //pass user input as argument to set value in firebase db
-        mSearchedCropReference.push().setValue(userInput);
-        }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedCropReference.removeEventListener(mSearchedCropReferenceListener);
-    }
 
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_CROP_KEY, location).apply();
-    }
-}
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mSearchedCropReference.removeEventListener(mSearchedCropReferenceListener);
+//    }
+//
+//    private void addToSharedPreferences(String location) {
+//        mEditor.putString(Constants.PREFERENCES_CROP_KEY, location).apply();
+//    }
+//}
